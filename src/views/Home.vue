@@ -1,8 +1,8 @@
 <template>
 	<div class="home"></div>
 	<button @click="getNews">get news</button>
-	<div class="error" v-if="displayError">
-		{{ displayError.message }}
+	<div v-if="displayError" class="error">
+		{{ displayError.status }} {{ displayError.message }}
 	</div>
 	<div class="loading" v-else-if="displayloading">loading...</div>
 	<div class="news" v-for="post in getNewsArray" :key="post.id" v-else>
@@ -22,9 +22,12 @@ export default {
 		const getNewsArray = computed(() => {
 			return store.state.news;
 		});
+
 		const displayError = computed(() => {
+			console.log(store.state.error);
 			return store.state.error;
 		});
+
 		const displayloading = computed(() => {
 			return store.state.loading;
 		});

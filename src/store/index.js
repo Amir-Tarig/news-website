@@ -16,9 +16,10 @@ export default createStore({
 			payload.map((post) => state.news.push(post));
 		},
 
-		handleError(state, payload) {
-			state.error.status = payload.err.response.status;
-			state.error.message = payload.err.response.message;
+		handleError(state, { code, message }) {
+			state.error.message = message;
+			state.error.status = code;
+			// console.log(code, message);
 		},
 
 		loadingStatus(state, payload) {
@@ -41,13 +42,19 @@ export default createStore({
 				commit('loadingStatus', false);
 			} catch (err) {
 				if (err.response) {
+					const code = err.response.status;
+					const message = err.response.data.message;
 					//The server respond with status of ${err.response.status}
-					commit('handleError', err.response.status, err.response.data.message);
-					console.log('Errors ', err.response.data.message);
-					console.log('Errors ', err.response.status);
-					console.log('Errors ', err.response.headers);
+					commit('handleError', { code, message });
+					// console.log('Errors ', err.response.data.message);
+					// console.log('Errors ', err.response.status);
+					// console.log('Errors ', err.response.headers);
 				} else if (err.request) {
-					console.log(err.request);
+					const code = 0;
+					const message =
+						'make sure your device has a working internet connection ';
+					commit('handleError', { code, message });
+					console.log(err.request.status);
 				} else {
 					console.log('Error ', err.message);
 				}
