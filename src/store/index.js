@@ -12,7 +12,7 @@ export default createStore({
 	},
 	mutations: {
 		setNews(state, payload) {
-			state.news = payload;
+			// state.news = payload;
 			payload.map((post) => state.news.push(post));
 		},
 
@@ -33,10 +33,10 @@ export default createStore({
 
 			try {
 				const data = await axios.get(
-					`https://newsapi.org/v2/everything?=covid-19&apiKey=${API_KEY}`
+					`https://newsapi.org/v2/everything?q=apple&apiKey=${API_KEY}`
 				);
 
-				// if (data.status !== 200) throw new Error();
+				if (data.status !== 200) throw new Error();
 
 				commit('setNews', data.data.articles);
 				commit('loadingStatus', false);
@@ -59,6 +59,11 @@ export default createStore({
 					console.log('Error ', err.message);
 				}
 			}
+		},
+	},
+	getters: {
+		getPosts(state) {
+			return state.news;
 		},
 	},
 	modules: {},

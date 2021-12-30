@@ -1,12 +1,13 @@
 <template>
-	<div class="home"></div>
-	<button @click="getNews">get news</button>
-	<div v-if="displayError" class="error">
-		{{ displayError.status }} {{ displayError.message }}
-	</div>
-	<div class="loading" v-else-if="displayloading">loading...</div>
-	<div class="news" v-for="post in getNewsArray" :key="post.id" v-else>
-		{{ post.title }}
+	<div class="home">
+		<button @click="getNews">get news</button>
+		<div v-if="displayError.status !== null" class="error">
+			{{ displayError.status }} {{ displayError.message }}
+		</div>
+		<div class="loading" v-else-if="displayloading">loading...</div>
+		<div class="news" v-for="post in getNewsArray" :key="post.id" v-else>
+			{{ post.title }}
+		</div>
 	</div>
 </template>
 
@@ -20,11 +21,11 @@ export default {
 		const store = useStore();
 
 		const getNewsArray = computed(() => {
-			return store.state.news;
+			// console.log(store.getters.getPosts);
+			return store.getters.getPosts;
 		});
 
 		const displayError = computed(() => {
-			console.log(store.state.error);
 			return store.state.error;
 		});
 
