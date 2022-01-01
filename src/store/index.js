@@ -13,13 +13,11 @@ export default createStore({
 	mutations: {
 		setNews(state, payload) {
 			state.news = [...payload];
-			// payload.map((post) => state.news.push(post));
 		},
 
 		handleError(state, { code, message }) {
 			state.error.message = message;
 			state.error.status = code;
-			// console.log(code, message);
 		},
 
 		loadingStatus(state, payload) {
@@ -43,11 +41,7 @@ export default createStore({
 				if (err.response) {
 					const code = err.response.status;
 					const message = err.response.data.message;
-					//The server respond with status of ${err.response.status}
 					commit('handleError', { code, message });
-					// console.log('Errors ', err.response.data.message);
-					// console.log('Errors ', err.response.status);
-					// console.log('Errors ', err.response.headers);
 				} else if (err.request) {
 					const code = 0;
 					const message =
