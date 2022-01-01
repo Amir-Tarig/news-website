@@ -21,7 +21,7 @@ export default {
 		const store = useStore();
 
 		const getNewsArray = computed(() => {
-			// console.log(store.getters.getPosts);
+			console.log(store.getters.getPosts ? store.getters.getPosts : '');
 			return store.getters.getPosts;
 		});
 

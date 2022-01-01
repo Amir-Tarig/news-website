@@ -12,8 +12,8 @@ export default createStore({
 	},
 	mutations: {
 		setNews(state, payload) {
-			// state.news = payload;
-			payload.map((post) => state.news.push(post));
+			state.news = [...payload];
+			// payload.map((post) => state.news.push(post));
 		},
 
 		handleError(state, { code, message }) {
@@ -27,17 +27,16 @@ export default createStore({
 		},
 	},
 	actions: {
+		// fetching data from the news API
 		async getNews({ commit }) {
 			const API_KEY = 'c5f12347d0544da89c51e954caf2a7ba';
 			commit('loadingStatus', true);
 
 			try {
 				const data = await axios.get(
-					`https://newsapi.org/v2/everything?q=apple&apiKey=${API_KEY}`
+					`https://newsapi.org/v2/everything?q=covid-19&apiKey=${API_KEY}`
 				);
-
 				if (data.status !== 200) throw new Error();
-
 				commit('setNews', data.data.articles);
 				commit('loadingStatus', false);
 			} catch (err) {
