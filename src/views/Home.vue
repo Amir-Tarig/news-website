@@ -1,18 +1,23 @@
 <template>
 	<div class="home">
-		<TheSlider />
+		<TheHeader @openModel="doSome" />
+		<Teleport to="body" v-if="model" class="model">
+			<TheMenuModel />
+		</Teleport>
 	</div>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
-import TheSlider from '../components/TheSlider.vue';
+import TheHeader from '../components/TheHeader.vue';
+import TheMenuModel from '../components/TheMenuModel.vue';
 export default {
 	name: 'Home',
-	components: { TheSlider },
+	components: { TheHeader, TheMenuModel },
 	setup() {
 		const store = useStore();
+		let model = ref(false);
 
 		const getNewsArray = computed(() => {
 			return store.getters.getPosts;
@@ -29,8 +34,19 @@ export default {
 		const getNews = () => {
 			store.dispatch('getNews');
 		};
+		const doSome = (el) => {
+			model.value = el;
+			console.log('am wasting my time', model.value);
+		};
 
-		return { getNews, getNewsArray, displayError, displayloading };
+		return {
+			getNews,
+			getNewsArray,
+			displayError,
+			displayloading,
+			doSome,
+			model,
+		};
 	},
 };
 </script>
@@ -39,5 +55,9 @@ export default {
 .home {
 	border: 1px solid red;
 	height: 100vh;
+}
+
+.model {
+	position: absolute;
 }
 </style>
