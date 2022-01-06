@@ -86,7 +86,7 @@
 						></path>
 					</svg>
 				</router-link>
-				<button @click="emitOpenModleVar">
+				<button class="menuBtn">
 					Menu
 					<span>
 						<svg
@@ -102,32 +102,105 @@
 					</span>
 				</button>
 			</div>
+			<div class="searchSignIn">
+				<input
+					type="text"
+					name="search"
+					id="search"
+					placeholder="search topics"
+				/>
+				<button class="signInBtn">
+					<span class="icon">
+						<svg
+							class="profileIcon profilePic"
+							width="15px"
+							height="15px"
+							viewBox="0 0 113 120"
+							focusable="false"
+						>
+							<g
+								xmlns="http://www.w3.org/2000/svg"
+								id="Asset-7"
+								transform="translate(6.000000, 0.000000)"
+							>
+								<path
+									d="M0.6048,113.537455 C0.270778183,113.537455 0,113.261753 0,112.921658 C0,112.921658 0,76.9745455 50.5008,76.9745455 C68.4472324,76.9745455 80.0290616,81.3101683 87.5022831,86.9763948 C101.593696,97.6605604 101.0772,113.075607 101.0772,113.075607 C101.0772,113.415702 100.806422,113.691404 100.4724,113.691404 C85.1990967,113.667859 73.7441192,113.650201 66.1074675,113.638429 C51.5513192,113.61599 29.7170967,113.582332 0.6048,113.537455 Z"
+									id="Path"
+									stroke-width="11.5731"
+								></path>
+								<ellipse
+									id="Oval"
+									fill-rule="nonzero"
+									cx="50.7276"
+									cy="28.5575564"
+									rx="28.0476"
+									ry="28.5575564"
+								></ellipse>
+							</g>
+						</svg>
+					</span>
+					Sign in
+				</button>
+			</div>
 		</div>
+		<!-- <div id="nav">
+			<router-link to="/">Home</router-link> |
+			<router-link to="/about">About</router-link>
+		</div> -->
 	</header>
+	<router-view />
 </template>
 
 <script>
-import { ref } from 'vue';
-
 export default {
 	name: 'TheHeader',
-	component: {},
-	setup(prop, { emit }) {
-		const openModel = ref(false);
-
-		const emitOpenModleVar = () => {
-			openModel.value = !openModel.value;
-			emit('openModel', openModel.value);
-		};
-
-		return { openModel, emitOpenModleVar };
+	components: {},
+	setup() {
+		return {};
 	},
 };
 </script>
 
 <style scoped>
-.header {
+.globalHeader {
+	border: 1px solid black;
+	height: 10vh;
+}
+
+.logoMenuContainer {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border: 1px solid blue;
+	height: 5vh;
+}
+.logoMenu {
 	border: 1px solid red;
-	/* height: 10vh; */
+	display: flex;
+	align-items: center;
+}
+
+.link {
+	height: 100%;
+	padding-right: 16px;
+	/* border: 1px solid red; */
+	display: flex;
+	align-items: center;
+}
+.menuBtn {
+	border: none;
+	background-color: transparent;
+	color: #e60505;
+	font-size: 1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: left;
+	padding: 12px 16px;
+	/* border: 1px solid red; */
+}
+
+.menuBtn::before {
 }
 </style>
