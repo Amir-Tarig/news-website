@@ -138,10 +138,16 @@
 						Search</label
 					>
 				</form>
-				<button class="signInBtn">
+				<button
+					class="signInBtn"
+					@mouseover="isHoverSignIn = true"
+					@mouseleave="isHoverSignIn = false"
+					:class="{ signInBtnHover: isHoverSignIn }"
+				>
 					<span class="icon">
 						<svg
-							class="profileIcon profilePic"
+							:class="{ profileIconHover: isHoverSignIn }"
+							class="profileIcon"
 							width="15px"
 							height="15px"
 							viewBox="0 0 113 120"
@@ -188,9 +194,11 @@ export default {
 	setup() {
 		const isHover = ref(false);
 		const isHoverSearch = ref(false);
+		const isHoverSignIn = ref(false);
 		return {
 			isHover,
 			isHoverSearch,
+			isHoverSignIn,
 		};
 	},
 };
@@ -233,7 +241,8 @@ export default {
 	text-decoration: none;
 	text-align: left;
 	padding: 12px 16px;
-	/* border: 1px solid red; */
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
 	position: relative;
 }
 
@@ -280,7 +289,7 @@ export default {
 }
 
 .searchSignIn {
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	display: flex;
 	align-items: center;
 	gap: 30px;
@@ -289,13 +298,11 @@ export default {
 #form > * {
 	margin: 0 0.5em;
 }
-/* #form {
-	border: 4px solid blue;
-} */
 
 #form label {
-	border: 1px solid #d3d3d3;
-	padding: 5px 10px;
+	/* border: 1px solid #d3d3d3; */
+	padding: 10px 12px;
+	cursor: pointer;
 }
 
 .labelHoverColor {
@@ -309,7 +316,44 @@ export default {
 	margin-bottom: 3px;
 }
 #search {
-	padding: 5px;
+	padding: 6px 8px;
 	width: 200px;
+	border-radius: 5px;
+	border: none;
+	box-shadow: inset 2px 0 0 rgba(0, 0, 0, 0.3),
+		inset -2px -0 0 rgba(0, 0, 0, 0.3);
+}
+
+#search:focus {
+	outline: none;
+	box-shadow: inset 2px 0 1px rgba(0, 0, 0, 0.3),
+		inset -2px -0 1px rgba(0, 0, 0, 0.3);
+}
+
+.signInBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	width: 100px;
+	padding: 10px 0;
+	background: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.signInBtn span {
+	margin-right: 5px;
+}
+
+.signInBtnHover {
+	color: #e60505;
+}
+
+.profileIconHover {
+	fill: red;
 }
 </style>
