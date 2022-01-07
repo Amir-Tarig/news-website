@@ -86,10 +86,16 @@
 						></path>
 					</svg>
 				</router-link>
-				<button class="menuBtn">
+				<button
+					class="menuBtn"
+					@mouseover="isHover = true"
+					@mouseleave="isHover = false"
+					:class="{ menuBtnHover: isHover }"
+				>
 					Menu
-					<span>
+					<span class="menuIcon" :class="{ menuIconHover: isHover }">
 						<svg
+							:class="{ chevronIconHover: isHover }"
 							viewBox="0 0 10 10"
 							focusable="false"
 							class="chevronIcon"
@@ -103,12 +109,35 @@
 				</button>
 			</div>
 			<div class="searchSignIn">
-				<input
-					type="text"
-					name="search"
-					id="search"
-					placeholder="search topics"
-				/>
+				<form id="form">
+					<input
+						type="text"
+						name="search"
+						id="search"
+						placeholder="SEARCH CBC"
+					/>
+					<label
+						for="search"
+						@mouseover="isHoverSearch = true"
+						@mouseleave="isHoverSearch = false"
+						:class="{ labelHoverColor: isHoverSearch }"
+					>
+						<svg
+							:class="{ svgHoverColor: isHoverSearch }"
+							class="searchIcon"
+							width="15px"
+							height="15px"
+							viewBox="0 0 165 162"
+							focusable="false"
+						>
+							<path
+								fill-rule="nonzero"
+								d="M158.88247 135.38291L118.68966 95.4442c5.73759-9.30843 9.21631-20.15477 9.21631-31.88285C127.90597 29.56938 100.1562 2 65.953 2 31.74477 2 4 29.56938 4 63.56134c0 33.987 27.74477 61.56135 61.95299 61.56135 11.80269 0 22.71803-3.45674 32.08567-9.13801l40.19281 39.91868c2.82338 2.80553 7.50212 2.7855 10.3255 0l10.3255-10.26022c2.82337-2.80553 2.82337-7.4547 0-10.26023zm-92.92948-30.78067c-22.80887 0-41.302-18.37622-41.302-41.0409 0-22.66467 18.49313-41.0409 41.302-41.0409 22.80886 0 41.30199 18.37623 41.30199 41.0409 0 22.66468-18.49313 41.0409-41.302 41.0409z"
+							></path>
+						</svg>
+						Search</label
+					>
+				</form>
 				<button class="signInBtn">
 					<span class="icon">
 						<svg
@@ -152,11 +181,17 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
 	name: 'TheHeader',
 	components: {},
 	setup() {
-		return {};
+		const isHover = ref(false);
+		const isHoverSearch = ref(false);
+		return {
+			isHover,
+			isHoverSearch,
+		};
 	},
 };
 </script>
@@ -176,7 +211,7 @@ export default {
 	height: 5vh;
 }
 .logoMenu {
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	display: flex;
 	align-items: center;
 }
@@ -199,8 +234,82 @@ export default {
 	text-align: left;
 	padding: 12px 16px;
 	/* border: 1px solid red; */
+	position: relative;
+}
+
+.menuBtnHover {
+	color: black;
 }
 
 .menuBtn::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translate(0, -50%);
+	background-color: red;
+	width: 2px;
+	height: 20px;
+}
+
+.menuIcon {
+	display: inline-block;
+	margin-left: 5px;
+	width: 11px;
+	height: 11px;
+	position: relative;
+	border-radius: 10px;
+	padding: 8px;
+	transition: 0.2s ease-in-out;
+}
+.chevronIcon {
+	fill: #e60505;
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	vertical-align: middle;
+	transition: 0.2s ease-in-out;
+}
+.chevronIconHover {
+	fill: white;
+}
+
+.menuIconHover {
+	background: #e60505;
+}
+
+.searchSignIn {
+	border: 1px solid red;
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	height: 100%;
+}
+#form > * {
+	margin: 0 0.5em;
+}
+/* #form {
+	border: 4px solid blue;
+} */
+
+#form label {
+	border: 1px solid #d3d3d3;
+	padding: 5px 10px;
+}
+
+.labelHoverColor {
+	color: #e60505;
+}
+.svgHoverColor {
+	fill: #e60505;
+}
+#form label .searchIcon {
+	vertical-align: middle;
+	margin-bottom: 3px;
+}
+#search {
+	padding: 5px;
+	width: 200px;
 }
 </style>
