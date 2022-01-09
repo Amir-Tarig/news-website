@@ -178,6 +178,72 @@
 				</button>
 			</div>
 		</div>
+		<nav id="nav">
+			<div class="navContainer">
+				<p class="news">NEWS</p>
+				<router-link class="navLinks" to="/about">Top Stories</router-link>
+				<router-link class="navLinks" to="/about">local</router-link>
+				<router-link class="navLinks" to="/about">Covid-19</router-link>
+				<router-link class="navLinks" to="/about">Opinion</router-link>
+				<router-link class="navLinks" to="/about">World</router-link>
+				<router-link class="navLinks" to="/about">Canada</router-link>
+				<router-link class="navLinks" to="/about">Politics</router-link>
+				<router-link class="navLinks" to="/about">Indigenous</router-link>
+				<router-link class="navLinks" to="/about">The National</router-link>
+				<div class="moreItemsNav">
+					<button
+						class="moreBtn"
+						@mouseover="isClickedMoreBtn = true"
+						@mouseleave="isClickedMoreBtn = false"
+						:class="{ moreBtnClicked: isClickedMoreBtn }"
+					>
+						More
+						<span
+							class="optionsIcon"
+							:class="{ optionsIconClicked: isClickedMoreBtn }"
+						>
+							<svg
+								:class="{ optionsSvgClicked: isClickedMoreBtn }"
+								viewBox="0 0 10 10"
+								focusable="false"
+								class="optionsSvg"
+								width="10px"
+								height="10px"
+								role="presentation"
+							>
+								<g><path d="M10,0v3L5,7L0,3V0l5,4L10,0z"></path></g>
+							</svg>
+						</span>
+					</button>
+					<ul class="moreOptionsList">
+						<li>
+							<router-link to="">Bussiness</router-link>
+						</li>
+						<li>
+							<router-link to="">Health</router-link>
+						</li>
+						<li>
+							<router-link to="">Entertainment</router-link>
+						</li>
+						<li>
+							<router-link to="">Science</router-link>
+						</li>
+						<li>
+							<router-link to="">Go Public</router-link>
+						</li>
+						<li>
+							<router-link to="">Shows</router-link>
+						</li>
+						<li>
+							<router-link to=""></router-link>
+						</li>
+						<li>
+							<router-link to=""></router-link>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		<!-- <div id="nav">
 			<router-link to="/">Home</router-link> |
 			<router-link to="/about">About</router-link>
@@ -195,10 +261,17 @@ export default {
 		const isHover = ref(false);
 		const isHoverSearch = ref(false);
 		const isHoverSignIn = ref(false);
+		const isClickedMoreBtn = ref(false);
+
+		window.addEventListener('resize', () => {
+			console.log(window.innerWidth);
+		});
+
 		return {
 			isHover,
 			isHoverSearch,
 			isHoverSignIn,
+			isClickedMoreBtn,
 		};
 	},
 };
@@ -355,5 +428,81 @@ export default {
 
 .profileIconHover {
 	fill: red;
+}
+
+.moreOptionsList {
+	display: none;
+}
+
+#nav {
+	background: #e60505;
+	color: white;
+	height: 50%;
+}
+.navContainer {
+	width: 70%;
+	height: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 5px solid blue;
+}
+
+.news {
+	font-size: 2rem;
+}
+.navLinks {
+	text-decoration: none;
+	color: white;
+	font-weight: 700;
+	font-size: 18px;
+}
+
+.navContainer a.router-link-active,
+.navContainer a.router-link-exact-active {
+	background: white;
+	color: #e60505;
+	padding: 3px 3px;
+}
+
+.moreBtn {
+	background: transparent;
+	color: white;
+	font-weight: 700;
+	border: 1px solid white;
+	width: 70px;
+	height: 30px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.moreBtnClicked {
+	background: white;
+	color: black;
+}
+
+.optionsIcon {
+	/* margin-top: 5px; */
+	border-radius: 10px;
+	width: 14px;
+	height: 14px;
+	background: white;
+}
+.optionsIconClicked {
+	border: 1px solid black;
+	background: #e60505;
+}
+.optionsSvg {
+	/* border: 1px solid blue; */
+	fill: #e60505;
+	margin-bottom: 2px;
+}
+
+.optionsSvgClicked {
+	fill: white;
 }
 </style>
